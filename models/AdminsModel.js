@@ -1,18 +1,12 @@
 import {Schema, model} from 'mongoose';
 
 const adminsschema = new Schema({
-    eventName: { type : String, required : true},
-    website: { type : String, required : true},
-    facebook: { type : String},
-    linkedin: { type : String},
-    instagram: { type : String},
-    organizer: { type : String, required : true},
-    description: { type : String, required : true},
-    contactNum: { type : String, required : true},
+    firstName: { type : String, required : true},
+    lastName: { type : String, required : true},
+    email: { type : String, required : true},
+    cafeName: { type : String, required : true},
     location:{ type : String, required : true},
-    date: { type : String, required : true},
-    image: { data: Buffer, contentType: String },
-    isApproved: {type: Boolean, required: true},
+    password: { type : String, required : true},
 });
 const Admin = model('Admin', adminsschema);
 Admin.createIndexes();
