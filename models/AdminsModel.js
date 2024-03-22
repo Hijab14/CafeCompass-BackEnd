@@ -6,7 +6,7 @@ const adminsschema = new Schema({
     email: { type : String, required : true},
     cafeName: { type : String, required : true},
     location:{ type : String, required : true},
-    password: { type : String, required : true},
+    Password: { type : String, required : true},
 });
 const Admin = model('Admin', adminsschema);
 Admin.createIndexes();
