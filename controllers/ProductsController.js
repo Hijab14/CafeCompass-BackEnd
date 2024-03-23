@@ -1,29 +1,25 @@
-import Product from "../models/ProductsModel";
+import Product from "../models/ProductsModel.js";
 
-export const addConference = async (req, res) => {
-    console.log("something");
-    try {
-      const connectorData = {
-        eventName: req.body.eventName,
-        website: req.body.website,
-        facebook: req.body.facebook,
-        linkedin: req.body.linkedin,
-        instagram: req.body.instagram,
-        organizer: req.body.organizer,
-        description: req.body.description,
-        contactNum: req.body.num,
-        location:req.body.location,
-        date: req.body.date,
-        isApproved: false,
-      };
+export const addProduct = async (req, res) => {
+  try {
+      const data =  {
+          productName: req.body.productName,
+          quantity: req.body.quantity,
+          price: req.body.price,
+          cafeName: req.body.cafeName,
+          category: req.body.category,
+          location: req.body.location,
+          imageURL: req.body.imageURL
+      } ;
 
-      // Create the connector in the connector collection
-      const newConnector = await Conference.create(connectorData);
-  
-      res.json(newConnector);
-      console.log("Connector requested successfully!");
-    } catch (error) {
+      const newProduct = await Product.create(data);
+
+      res.json(newProduct);
+      console.log("Product requested successfully!");
+      res.status(201).json({ success: true, data: newProduct });
+  } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
+      console.log("Product not added!");
+      res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};

@@ -1,4 +1,4 @@
-import Admin from "../models/AdminsModel";
+import Admin from "../models/AdminsModel.js";
 import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,11 +14,11 @@ export const loginAdmin = async (req, res) => {
     try {
         let User = await Admin.findOne({ Email });
         if (!User) {
-            return res.status(400).json({ success: false, errors: [{ msg: "Invalid Credentials" }] });
+            return res.status(400).json({ success: false, errors: [{ msg: Email }] });
         }
-        const isMatch = await bcrypt.compare(Password, User.password);
+        const isMatch = await bcrypt.compare(Password, User.Password);
         if (!isMatch) {
-            return res.status(400).json({ success: false, errors: [{ msg: "Invalid Credentials" }] });
+            return res.status(400).json({ success: false, errors: [{ msg: "Invalid Credentials Password" }] });
         }
         const payload = {
             User: {
