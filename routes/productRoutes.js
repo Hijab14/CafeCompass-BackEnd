@@ -1,5 +1,5 @@
 import express from "express";
-import { addProduct } from "../controllers/ProductsController.js";
+import { addProduct, getProductsCategory, getProductsCafe, getProductsLocation, getProductsName, deleteProductById , updateProduct} from "../controllers/ProductsController.js";
 
 const app = express();
 
@@ -9,5 +9,10 @@ const router = express.Router();
 
 // POST /api/products
 router.post("/addProduct", addProduct);
-
+router.get("/getCategory", getProductsCategory);
+router.get("/getCafe", getProductsCafe);
+router.get("/getLocation", getProductsLocation);
+router.get("/getName", getProductsName);
+router.delete('/:productId', deleteProductById);
+router.put("/update", updateProduct);
 export default router;

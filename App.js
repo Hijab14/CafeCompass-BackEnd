@@ -6,7 +6,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'; // Add this line to import dotenv
 import productRoutes from './routes/productRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
-
+import orderRoutes from './routes/orderRoutes.js';
 dotenv.config(); // Add this line to load environment variables from .env file
 
 
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/admins", adminRoutes);
-
+app.use("/api/orders", orderRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT,()=>{
