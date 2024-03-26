@@ -27,7 +27,9 @@ export const addProduct = async (req, res) => {
 export const getProductsCategory = async (req, res) => {
     try {
       const { category } = req.query;
+      console.log(category);
       const products = await Product.find({ category });
+      console.log(products);
       res.json(products);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -78,25 +80,25 @@ export const deleteProductById = async (req, res) => {
   };
 
 export const updateProduct = async (req, res) => {
-    try {
-      const { productName, cafeName, newQuantity, newPrice } = req.body;
-      
-      // Find the product by product name and cafe name
-      const product = await Product.findOne({ productName, cafeName });
-      
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-  
-      // Update the product's quantity and price
-      product.quantity = newQuantity;
-      product.price = newPrice;
-  
-      // Save the updated product
-      await product.save();
-  
-      res.json({ message: 'Product updated successfully' });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+  try {
+    const { productName, cafeName, newQuantity, newPrice } = req.body;
+    
+    // Find the product by product name and cafe name
+    const product = await Product.findOne({ productName, cafeName });
+    
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
-  };
+
+    // Update the product's quantity and price
+    product.quantity = newQuantity;
+    product.price = newPrice;
+
+    // Save the updated product
+    await product.save();
+
+    res.json({ message: 'Product updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
