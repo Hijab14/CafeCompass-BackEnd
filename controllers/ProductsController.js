@@ -37,6 +37,7 @@ export const getProductsCategory = async (req, res) => {
   };
 
   export const getProductsLocation = async (req, res) => {
+    console.log("hh");
     try {
       const { location } = req.query;
       const products = await Product.find({ location });
@@ -67,21 +68,37 @@ export const getProductsName = async (req, res) => {
   };
 
 export const deleteProductById = async (req, res) => {
+    // try {
+    //   const { productId } = req.params;
+    //   const deletedProduct = await Product.findByIdAndDelete(productId);
+    //   if (!deletedProduct) {
+    //     return res.status(404).json({ message: 'Product not found' });
+    //   }
+    //   res.json({ message: 'Product deleted successfully' });
+    // } catch (error) {
+    //   res.status(500).json({ message: error.message });
+    // }
     try {
-      const { productId } = req.params;
-      const deletedProduct = await Product.findByIdAndDelete(productId);
-      if (!deletedProduct) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-      res.json({ message: 'Product deleted successfully' });
+        const { productName, cafeName } = req.body;
+        console.log(productName);
+        
+        // Find the product by name and cafe name
+        const deletedProduct = await Product.findOneAndDelete({ productName, cafeName });
+        
+        if (!deletedProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        
+        res.json({ message: 'Product deleted successfully' });
     } catch (error) {
-      res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
   };
 
 export const updateProduct = async (req, res) => {
   try {
     const { productName, cafeName, newQuantity, newPrice } = req.body;
+    console.log(cafeName);
     
     // Find the product by product name and cafe name
     const product = await Product.findOne({ productName, cafeName });
@@ -101,4 +118,18 @@ export const updateProduct = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+export const getAllProducts = async (req, res) => {
+    console.log("JJJ");
+    try {
+        // Fetch all products from the database
+        const products = await Product.find();
+
+        // Send the products as a response
+        res.json(products);
+    } catch (error) {
+        // If there's an error, send a 500 status with the error message
+        res.status(500).json({ message: error.message });
+    }
 };

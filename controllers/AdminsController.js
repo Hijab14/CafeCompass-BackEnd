@@ -1,6 +1,5 @@
 import Admin from "../models/AdminsModel.js";
 import { validationResult } from "express-validator";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "mhmkisgood$";
@@ -16,12 +15,12 @@ export const loginAdmin = async (req, res) => {
         if (!User) {
             return res.status(400).json({ success: false, errors: [{ msg: Email }] });
         }
-        const isMatch = await bcrypt.compare(Password, User.Password);
-        console.log(Password);
-        console.log(User.Password);
-        if (!isMatch) {
+        
+        // Compare plaintext passwords directly
+        if (Password !== User.Password) {
             return res.status(400).json({ success: false, errors: [{ msg: "Invalid Credentials Password" }] });
         }
+        
         const payload = {
             User: {
                 id: User.id

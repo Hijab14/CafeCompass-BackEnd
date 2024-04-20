@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from 'cors';
 import dotenv from 'dotenv'; // Add this line to import dotenv
-import productRoutes from './routes/productRoutes.js';
+import productRoutes from './routes/ProductRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 dotenv.config(); // Add this line to load environment variables from .env file
