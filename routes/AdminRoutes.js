@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from "express-validator";
-import { loginAdmin,getAdmin } from "../controllers/AdminsController.js";
+import { loginAdmin, getAdmin, updatePassword } from "../controllers/AdminsController.js";
 import fetchUser from "../middleware/fetchUser.js";
 
 const router = express.Router();
@@ -11,5 +11,7 @@ router.post("/loginAdmin", [
 ], loginAdmin);
 
 router.post("/getAdmin", fetchUser, getAdmin);
+
+router.put("/updatePassword", fetchUser, updatePassword);
 
 export default router;
