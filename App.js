@@ -1,4 +1,3 @@
-
 import Express  from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -7,6 +6,7 @@ import dotenv from 'dotenv'; // Add this line to import dotenv
 import productRoutes from './routes/ProductRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import userRoutes from './routes/userRoutes.js'
 dotenv.config(); // Add this line to load environment variables from .env file
 
 
@@ -32,9 +32,10 @@ app.use((req, res, next) => {
 app.use("/api/products", productRoutes);
 app.use("/api/admins", adminRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/users", userRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT,()=>{
-    console.log(`Server is running on ${PORT}`)
+    console.log('Server is running on ${PORT}')
 })
-
